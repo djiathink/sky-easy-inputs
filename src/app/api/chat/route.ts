@@ -97,9 +97,11 @@ export async function POST(request: NextRequest) {
     );
   } catch (error) {
     console.error("Chat error:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Erreur inconnue";
     return new Response(
       JSON.stringify({
-        error: "Erreur lors du traitement de votre message",
+        error: `Erreur lors du traitement de votre message: ${errorMessage}`,
       }),
       {
         status: 500,

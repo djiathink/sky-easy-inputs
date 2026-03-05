@@ -36,8 +36,10 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error("Auth error:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Erreur inconnue";
     return NextResponse.json(
-      { error: "Erreur de connexion au serveur Odoo" },
+      { error: `Erreur de connexion au serveur Odoo: ${errorMessage}` },
       { status: 500 }
     );
   }
